@@ -1,0 +1,373 @@
+﻿<Page x:Class="Coffe_Grinder.CreateOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Coffe_Grinder"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1366"
+      Title="إنشاء طلب جديد"
+      FlowDirection="RightToLeft">
+
+    <Page.Resources>
+        <!-- Decimal to String Converter for Quantity -->
+        <local:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
+
+        <Style x:Key="FormLabel" TargetType="Label">
+            <Setter Property="Foreground" Value="#5D4037"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,5,0,2"/>
+            <Setter Property="FontFamily" Value="Traditional Arabic"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+
+        <Style x:Key="FormTextBox" TargetType="TextBox">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontFamily" Value="Traditional Arabic"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="BorderBrush" Value="#D7CCC8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="FormComboBox" TargetType="ComboBox">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontFamily" Value="Traditional Arabic"/>
+            <Setter Property="BorderBrush" Value="#D7CCC8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="Background" Value="#8D6E63"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontFamily" Value="Traditional Arabic"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#6D4C41"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CompactActionButton" TargetType="Button" BasedOn="{StaticResource ActionButton}">
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="10,2"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+
+        <Style x:Key="RemoveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#8D6E63"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Traditional Arabic"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#6D4C41"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="CoffeeCard" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="BorderBrush" Value="#D7CCC8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="5" Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="#EFEBE9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Background="#8D6E63" Padding="15" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Back/Navigation Button -->
+                <Button Grid.Column="0" Content="ادارة الطلبات" 
+                        Style="{StaticResource ActionButton}" 
+                        HorizontalAlignment="Left"
+                        Click="NavigateToOrders_Click"
+                        Margin="0,0,15,0"/>
+
+                <!-- Page Title -->
+                <TextBlock Grid.Column="1" Text="إنشاء طلب جديد" 
+                           FontSize="20" FontWeight="Bold" 
+                           Foreground="White" FontFamily="Traditional Arabic"
+                           HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="450"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Coffee Selection Area -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Search and Filter -->
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="SearchBox" Grid.Column="0" Style="{StaticResource FormTextBox}" 
+                             TextChanged="SearchBox_TextChanged" Margin="120,9,172,1"/>
+                    <ComboBox x:Name="CoffeeTypesList"
+                              Grid.Column="1"
+                              Style="{StaticResource FormComboBox}"
+                              SelectedValuePath="CoffeeTypeID"
+                              SelectionChanged="CoffeeTypesList_SelectionChanged"
+                              HorizontalContentAlignment="Right"
+                              IsSynchronizedWithCurrentItem="True" Margin="6,6,4,4" Grid.ColumnSpan="2"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="34,4,0,0" TextWrapping="Wrap" FontSize="25" FontWeight="Bold" VerticalAlignment="Top"><Run Language="ar-sa" Text="ابحث : "/></TextBlock>
+                </Grid>
+
+                <!-- Coffee Selection Grid -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="CoffeeSelectionGrid">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource CoffeeCard}" Width="250" Height="180">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0" Text="{Binding CoffeeName}" FontWeight="Bold" 
+                                                   Foreground="#5D4037" FontSize="16" Margin="0,0,0,5"/>
+
+                                        <TextBlock Grid.Row="1" Text="{Binding CoffeeType.TypeName}" 
+                                                   Foreground="#8D6E63" FontSize="12" Margin="0,0,0,5"/>
+
+                                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,5">
+                                            <TextBlock Text="السعر: " Foreground="#5D4037" FontSize="12"/>
+                                            <TextBlock Text="{Binding UnitPrice, StringFormat={}{0:F2}}" Foreground="#5D4037" FontSize="12"/>
+                                            <TextBlock Text=" جنيه/كجم" Foreground="#5D4037" FontSize="12" Margin="5,0,0,0"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,5">
+                                            <TextBlock Text="المتوفر: " Foreground="#5D4037" FontSize="12"/>
+                                            <TextBlock Text="{Binding MaxQuantity, StringFormat={}{0:F3}}" Foreground="#5D4037" FontSize="12"/>
+                                            <TextBlock Text=" كجم" Foreground="#5D4037" FontSize="12" Margin="5,0,0,0"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                            <Button Content="-" Tag="{Binding CoffeeID}" Style="{StaticResource CompactActionButton}" 
+                                                    Width="40" Click="DecreaseQuantity_Click"/>
+
+                                            <TextBox Width="70" Text="{Binding Quantity, Converter={StaticResource DecimalToStringConverter}}" 
+                                                     TextAlignment="Center" VerticalContentAlignment="Center" Margin="5,0"
+                                                     TextChanged="QuantityTextBox_TextChanged" 
+                                                     GotFocus="QuantityTextBox_GotFocus"
+                                                     LostFocus="QuantityTextBox_LostFocus"
+                                                     PreviewTextInput="QuantityTextBox_PreviewTextInput"/>
+
+                                            <Button Content="+" Tag="{Binding CoffeeID}" Style="{StaticResource CompactActionButton}" 
+                                                    Width="40" Click="IncreaseQuantity_Click"/>
+
+                                            <TextBlock Text="كجم" VerticalAlignment="Center" Margin="5,0,0,0" 
+                                                       Foreground="#5D4037" FontSize="12"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- Divider -->
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center"
+                          Background="#D7CCC8" IsTabStop="False"/>
+
+            <!-- Order Details Area -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Customer Information -->
+                <Border Grid.Row="0" Background="White" Padding="8" Margin="0,0,0,8"
+                        BorderBrush="#D7CCC8" BorderThickness="1" CornerRadius="5">
+                    <StackPanel>
+                        <TextBlock Text="بيانات العميل" FontWeight="Bold" FontSize="15" 
+                                   Foreground="#5D4037" Margin="0,0,0,8"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="اسم العميل" Style="{StaticResource FormLabel}" Margin="0,5,5,2"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" x:Name="CustomerName" Style="{StaticResource FormTextBox}" Margin="0,0,0,5"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Content="رقم الهاتف" Style="{StaticResource FormLabel}" Margin="0,5,5,2"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="CustomerPhone" Style="{StaticResource FormTextBox}" Margin="0,0,0,5"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Content="ملاحظات" Style="{StaticResource FormLabel}" Margin="0,5,5,2"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="OrderNotes" Style="{StaticResource FormTextBox}" 
+                                     Height="40" TextWrapping="Wrap" AcceptsReturn="True"
+                                     VerticalScrollBarVisibility="Auto" TextChanged="OrderNotes_TextChanged" Margin="0,0,0,5"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Order Items Header -->
+                <Border Grid.Row="1" Background="#8D6E63" Padding="10">
+                    <TextBlock Text="عناصر الطلب" FontWeight="Bold" FontSize="16" Foreground="White"/>
+                </Border>
+
+                <!-- Order Items -->
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                    <DataGrid x:Name="OrderItemsGrid" AutoGenerateColumns="False" 
+                              IsReadOnly="False" HeadersVisibility="Column"
+                              CanUserAddRows="False" CanUserDeleteRows="False"
+                              SelectionChanged="OrderItemsGrid_SelectionChanged"
+                              CellEditEnding="OrderItemsGrid_CellEditEnding"
+                              PreparingCellForEdit="OrderItemsGrid_PreparingCellForEdit"
+                              Background="White" BorderBrush="#D7CCC8" BorderThickness="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="المنتج" Binding="{Binding CoffeeName}" Width="0.8*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="الكمية (كجم)" Binding="{Binding Quantity, StringFormat={}{0:F3}}" Width="0.6*" IsReadOnly="False"/>
+                            <DataGridTextColumn Header="سعر الكيلو" Binding="{Binding UnitPrice, StringFormat={}{0:F2}}" Width="0.6*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="المجموع" Binding="{Binding Subtotal, StringFormat={}{0:F2}}" Width="0.6*" IsReadOnly="True"/>
+                            <DataGridTemplateColumn Width="Auto" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="حذف" Style="{StaticResource RemoveButtonStyle}" 
+                                                Click="RemoveItem_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
+
+                <!-- Order Summary -->
+                <Border Grid.Row="3" Background="White" Padding="8" Margin="0,8,0,0"
+                        BorderBrush="#D7CCC8" BorderThickness="1" CornerRadius="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Left side - Payment info -->
+                        <StackPanel Grid.Column="0" Margin="10,0,5,0">
+                            <Label Content="المبلغ المدفوع" Style="{StaticResource FormLabel}" Margin="0,0,0,0"/>
+                            <TextBox x:Name="AmountPaid" Style="{StaticResource FormTextBox}" 
+                                     TextChanged="AmountPaid_TextChanged" Margin="0,0,0,70"/>
+                        </StackPanel>
+
+                        <!-- Right side - Totals and buttons -->
+                        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                            <Grid Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="الإجمالي:" FontWeight="Bold" 
+                                           Foreground="#5D4037" FontSize="14"/>
+                                <TextBlock Grid.Column="2" x:Name="OrderTotal" Text="0.00" FontWeight="Bold" 
+                                           Foreground="#5D4037" FontSize="14" TextAlignment="Right"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="المتبقي:" FontWeight="Bold" 
+                                           Foreground="#5D4037" FontSize="14"/>
+                                <TextBlock Grid.Column="2" x:Name="ChangeAmount" Text="0.00" FontWeight="Bold" 
+                                           Foreground="Green" FontSize="14" TextAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Action Buttons -->
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" 
+                            VerticalAlignment="Bottom" Margin="0,70,0,5">
+                    <Button x:Name="PrintOrder" Content="طباعة" Style="{StaticResource ActionButton}" 
+                            Click="PrintOrder_Click" Margin="5"/>
+                    <Button x:Name="ClearOrder" Content="مسح" Style="{StaticResource ActionButton}" 
+                            Click="ClearOrder_Click" Margin="5"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!-- Footer -->
+        <Border Grid.Row="2" Background="#8D6E63" Padding="10">
+            <TextBlock Text="محمصة القهوة | نظام إدارة المبيعات" 
+                       FontSize="12" Foreground="White" HorizontalAlignment="Center"/>
+        </Border>
+    </Grid>
+</Page>

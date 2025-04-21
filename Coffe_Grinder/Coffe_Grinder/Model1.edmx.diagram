@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b3ff1411df0143c08fdf7feb9f4147cb" Name="Diagram1">
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.Alert" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.CoffeeInventory" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.CoffeeType" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.OrderDetail" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.Order" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.OrderStatus" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.User" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.vw_CoffeeInventoryWithTypes" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.vw_LowStockAlerts" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Coffe_Grinder_DB_Model.vw_OrderDetailsExtended" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Coffe_Grinder_DB_Model.FK__Alerts__CoffeeID__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Coffe_Grinder_DB_Model.FK__CoffeeInv__Coffe__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Coffe_Grinder_DB_Model.FK__OrderDeta__Coffe__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="Coffe_Grinder_DB_Model.FK__OrderDeta__Order__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="Coffe_Grinder_DB_Model.FK__Orders__StatusID__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="Coffe_Grinder_DB_Model.FK__Orders__UserID__46E78A0C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Coffe_Grinder_DB_ModelStoreContainer" CdmEntityContainer="Coffe_Grinder_DB_Entities">
+    <EntitySetMapping Name="Alerts">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.Alert">
+        <MappingFragment StoreEntitySet="Alerts">
+          <ScalarProperty Name="AlertID" ColumnName="AlertID" />
+          <ScalarProperty Name="CoffeeID" ColumnName="CoffeeID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoffeeInventories">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.CoffeeInventory">
+        <MappingFragment StoreEntitySet="CoffeeInventory">
+          <ScalarProperty Name="CoffeeID" ColumnName="CoffeeID" />
+          <ScalarProperty Name="CoffeeTypeID" ColumnName="CoffeeTypeID" />
+          <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+          <ScalarProperty Name="PricePerKg" ColumnName="PricePerKg" />
+          <ScalarProperty Name="CoffeeName" ColumnName="CoffeeName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CoffeeTypes">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.CoffeeType">
+        <MappingFragment StoreEntitySet="CoffeeTypes">
+          <ScalarProperty Name="CoffeeTypeID" ColumnName="CoffeeTypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="CoffeeID" ColumnName="CoffeeID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ChangeAmount" ColumnName="ChangeAmount" />
+          <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderStatuses">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.OrderStatus">
+        <MappingFragment StoreEntitySet="OrderStatuses">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_CoffeeInventoryWithTypes">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.vw_CoffeeInventoryWithTypes">
+        <MappingFragment StoreEntitySet="vw_CoffeeInventoryWithTypes">
+          <ScalarProperty Name="CoffeeID" ColumnName="CoffeeID" />
+          <ScalarProperty Name="CoffeeName" ColumnName="CoffeeName" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+          <ScalarProperty Name="PricePerKg" ColumnName="PricePerKg" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="StockLevel" ColumnName="StockLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_LowStockAlerts">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.vw_LowStockAlerts">
+        <MappingFragment StoreEntitySet="vw_LowStockAlerts">
+          <ScalarProperty Name="CoffeeID" ColumnName="CoffeeID" />
+          <ScalarProperty Name="CoffeeName" ColumnName="CoffeeName" />
+          <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="AlertDate" ColumnName="AlertDate" />
+          <ScalarProperty Name="AlertLevel" ColumnName="AlertLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_OrderDetailsExtended">
+      <EntityTypeMapping TypeName="Coffe_Grinder_DB_Model.vw_OrderDetailsExtended">
+        <MappingFragment StoreEntitySet="vw_OrderDetailsExtended">
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="CoffeeName" ColumnName="CoffeeName" />
+          <ScalarProperty Name="CoffeeType" ColumnName="CoffeeType" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="LineTotal" ColumnName="LineTotal" />
+          <ScalarProperty Name="OrderTakenBy" ColumnName="OrderTakenBy" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

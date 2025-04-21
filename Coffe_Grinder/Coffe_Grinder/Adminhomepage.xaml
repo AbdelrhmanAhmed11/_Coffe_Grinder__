@@ -1,0 +1,317 @@
+﻿<Page x:Class="Coffe_Grinder.Adminhomepage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Coffe_Grinder"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1366"
+      Title="لوحة تحكم المدير"
+      FlowDirection="RightToLeft">
+
+    <Page.Resources>
+        <!-- DataGrid Header Style -->
+        <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#C9B99E"/>
+            <Setter Property="Foreground" Value="#4A3F33"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <!-- Dashboard Button Style -->
+        <Style x:Key="DashboardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#C9B99E"/>
+            <Setter Property="Foreground" Value="#4A3F33"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Traditional Arabic"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="3" ShadowDepth="1" Opacity="0.15"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#B8A88D"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Loading Indicator Style -->
+        <Style x:Key="LoadingIndicatorStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#4A3F33"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontFamily" Value="Traditional Arabic"/>
+        </Style>
+
+        <!-- Low Stock Alert Style -->
+        <Style x:Key="LowStockAlertStyle" TargetType="Border">
+            <Setter Property="Background" Value="#DFD3BE"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#EBE5D9" Offset="0"/>
+                <GradientStop Color="#E0D9C9" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Main Grid Layout -->
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <Border Grid.Row="0" Background="#D6C8AF" CornerRadius="10" Padding="15" Margin="0,0,0,15">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="لوحة تحكم مدير طاحونة القهوة" 
+                               FontSize="26" FontWeight="Bold" Foreground="#4A3F33"
+                               VerticalAlignment="Center" FontFamily="Traditional Arabic"/>
+                    <Image Source="coffe_icon.png" Width="40" Height="40" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Main Content Section -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Coffee Inventory Section -->
+                <Border Grid.Column="0" Background="#F5F1E8" CornerRadius="10" Padding="15">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+                            <TextBlock Text="مخزون القهوة" FontSize="20" FontWeight="Bold" Foreground="#4A3F33" FontFamily="Traditional Arabic"/>
+                            <Image Source="coffebeans.png" Width="24" Height="24" Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <DataGrid x:Name="CoffeeDataGrid" 
+                                     AutoGenerateColumns="False" IsReadOnly="True"
+                                     HeadersVisibility="Column" RowHeight="35" FontSize="14"
+                                     Background="Transparent" Foreground="#4A3F33" BorderThickness="0"
+                                     ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                     HorizontalGridLinesBrush="#D6C8AF" VerticalGridLinesBrush="#D6C8AF"
+                                     RowBackground="#F5F1E8" AlternatingRowBackground="#EBE5D9"
+                                     FontFamily="Traditional Arabic">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="القهوة" Binding="{Binding CoffeeName}" Width="2*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Padding" Value="10,0"/>
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="النوع" Binding="{Binding CoffeeType.TypeName}" Width="1.5*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="المخزون (كجم)" Binding="{Binding QuantityInStock, StringFormat={}{0:F3} كجم}" Width="1*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                <Setter Property="Padding" Value="0,0,10,0"/>
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="السعر/كجم" Binding="{Binding PricePerKg, StringFormat={}{0:F2} جنيه}" Width="1*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                <Setter Property="Padding" Value="0,0,10,0"/>
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock x:Name="CoffeeLoadingIndicator" Text="جاري تحميل مخزون القهوة..." 
+                                       Style="{StaticResource LoadingIndicatorStyle}"/>
+                        </Grid>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                            <Button Content="إدارة المخزون" Click="ManageInventory_Click"
+                                    Style="{StaticResource DashboardButtonStyle}" Margin="5" Width="300"/>
+                            <Button Content="تحديث البيانات" Click="RefreshData_Click"
+                                    Style="{StaticResource DashboardButtonStyle}" Margin="5" Width="300"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Orders Section -->
+                <Border Grid.Column="2" Background="#F5F1E8" CornerRadius="10" Padding="15">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+                            <TextBlock Text="الطلبات الأخيرة" FontSize="20" FontWeight="Bold" Foreground="#4A3F33" FontFamily="Traditional Arabic"/>
+                            <Image Source="ordericon.png" Width="24" Height="24" Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <DataGrid x:Name="OrdersDataGrid" 
+                                     AutoGenerateColumns="False" IsReadOnly="True"
+                                     HeadersVisibility="Column" RowHeight="35" FontSize="14"
+                                     Background="Transparent" Foreground="#4A3F33" BorderThickness="0"
+                                     ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}"
+                                     HorizontalGridLinesBrush="#D6C8AF" VerticalGridLinesBrush="#D6C8AF"
+                                     RowBackground="#F5F1E8" AlternatingRowBackground="#EBE5D9"
+                                     FontFamily="Traditional Arabic">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="رقم الطلب" Binding="{Binding OrderID}" Width="0.8*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="التاريخ" Binding="{Binding OrderDate, StringFormat={}{0:MM/dd/yyyy}}" Width="1*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="العميل" Binding="{Binding CustomerName}" Width="1.5*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="الحالة" Binding="{Binding OrderStatus.StatusName}" Width="1*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="الإجمالي" Binding="{Binding TotalPrice, StringFormat={}{0:F2} جنيه}" Width="1*">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                <Setter Property="Padding" Value="0,0,10,0"/>
+                                                <Setter Property="FontFamily" Value="Traditional Arabic"/>
+                                                <Setter Property="Foreground" Value="#4A3F33"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock x:Name="OrdersLoadingIndicator" Text="جاري تحميل الطلبات الأخيرة..." 
+                                       Style="{StaticResource LoadingIndicatorStyle}"/>
+                        </Grid>
+
+                        <Button Grid.Row="2" Content="عرض جميع الطلبات" Click="ViewAllOrders_Click"
+                                Style="{StaticResource DashboardButtonStyle}" Margin="0,15,0,0"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Low Stock Alerts Section -->
+            <Border Grid.Row="2" Background="#F5F1E8" CornerRadius="10" Margin="0,15,0,0" Padding="15">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+                        <TextBlock Text="تنبيهات المخزون المنخفض (أقل من 10 كجم)" FontSize="20" FontWeight="Bold" Foreground="#4A3F33" FontFamily="Traditional Arabic"/>
+                        <Image Source="alerticon.png" Width="24" Height="24" Margin="10,0,0,0"/>
+                    </StackPanel>
+
+                    <ListBox Grid.Row="1" x:Name="LowStockList" 
+                             Background="Transparent" BorderThickness="0" 
+                             Foreground="#4A3F33" FontSize="14"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             FontFamily="Traditional Arabic">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource LowStockAlertStyle}">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding CoffeeName}" FontWeight="Bold" Foreground="#4A3F33"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                            <TextBlock Text="المخزون الحالي:" Margin="0,0,5,0" Foreground="#4A3F33"/>
+                                            <TextBlock Text="{Binding QuantityInStock, StringFormat={}{0:F3} كجم}" Foreground="Red"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                            <TextBlock Text="النوع:" Margin="0,0,5,0" Foreground="#4A3F33"/>
+                                            <TextBlock Text="{Binding CoffeeType.TypeName}" Foreground="#4A3F33" FontStyle="Italic"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <ContentPresenter/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
